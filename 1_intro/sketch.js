@@ -1,12 +1,11 @@
-let v1;
-let x, y;
-let mouse;
+let v1, mouse, x, y, rad;
 let toggle;
+let c;
 
 function setup() {
     frameRate(30);
-    const myCanvas = createCanvas(500, 500);
-    myCanvas.parent("canvas");
+    c = createCanvas(500, 500);
+    c.parent("canvas");
     background(240);
 
     v1 = createVector(width / 2, height / 2);
@@ -45,5 +44,10 @@ function mouseClicked() {
 }
 
 function saveImage() {
-    saveCanvas(myCanvas, 'canvas', 'jpg');
+    saveCanvas(c, 'canvas', 'jpg');
+}
+
+function sendImage() {
+    let imageBase64String = c.elt.toDataURL();
+    // print(imageBase64String);
 }
