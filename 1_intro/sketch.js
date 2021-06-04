@@ -39,6 +39,7 @@ function mouseClicked() {
         toggle = !toggle;
         v1.x = mouseX;
         v1.y = mouseY;
+        //Just to verify
         // print(`${mouseX} ${mouseY}`)
     }
 }
