@@ -12,7 +12,7 @@ let active_tool = 0;
 let total_tools = 3;
 
 function setup() {
-	createCanvas(500, 500);
+	createCanvas(600, 600);
 	graphics = createGraphics(700,700);
 	graphics.clear();
 
@@ -20,7 +20,7 @@ function setup() {
 }
 
 function draw() {
-		background(0);
+		background(240);
 		//background(230);
 
 		if(active_tool ==0){
@@ -81,7 +81,6 @@ function draw() {
 			noStroke();
 			fill(255,0,0);
 			ellipse(mouseX,mouseY,25,25);
-			print(active_tool);
 		}
 		else if(active_tool == 1){
 			noFill();

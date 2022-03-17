@@ -4,7 +4,7 @@ precision mediump float;
 
 uniform vec2 u_rez;
 uniform sampler2D tex0;
-uniform float mytime;
+//uniform float mytime;
 //varying vec2 vTexCoord; //without uniform using TexCoord
 
 void main(){
@@ -16,17 +16,17 @@ void main(){
   vec4 col = texture2D(tex0,st);
   float cnt = 0.0;
 
-  float sin1 = (sin(mytime*2.0)+1.0)/2.0;
+  //float sin1 = sin(mytime);
 
-  for(int i=-5;i<=5;i++){
-    for(int j=-5;j<=5;j++){
+  for(int i=-3;i<=3;i++){
+    for(int j=-3;j<=3;j++){
       vec2 off = vec2(i,j)/u_rez.xy;
       vec2 ref = st.xy + off.xy;
       if(st.xy != ref.xy){
         vec4 mycol = texture2D(tex0,ref);
-        float val = mix(mycol.y,mycol.x,sin1)-mix(col.z,col.y,sin1);
-        //float val1 = mycol.z-col.z;
-        //float val2 = mix(val,val1,sin1);
+        float val = col.z-mycol.z;
+        float val1 = mycol.z-col.z;
+        //float val2 = mix(val1,val2,sin1);
         off = off * val;
         dir = dir + off;
         cnt = cnt +1.0;
@@ -35,9 +35,10 @@ void main(){
   }
 
   dir = dir/cnt;
+  //vec3 dircross = cross(vec3(dir.x,0.0,dir.y),vec3(0.0,1.0,0.0));
+  //dir = vec2(dircross.x,dircross.z)+dir;
   vec2 tar = st.xy + dir.xy;
   vec4 tex = texture2D(tex0,tar);
-  //tex.x *=.5;
 
   gl_FragColor = tex;
 }
