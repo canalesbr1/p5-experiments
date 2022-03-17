@@ -20,7 +20,8 @@ function setup() {
 }
 
 function draw() {
-		background(230);
+		background(0);
+		//background(230);
 
 		if(active_tool ==0){
 			let o = .05;
