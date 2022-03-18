@@ -1,4 +1,3 @@
-//python -m SimpleHTTPServer
 let graphics;
 
 let img_grab;
@@ -12,11 +11,11 @@ let active_tool = 0;
 let total_tools = 3;
 
 function setup() {
-	createCanvas(600, 600);
+	var canvas = createCanvas(600, 600);
 	graphics = createGraphics(700,700);
 	graphics.clear();
 
-	// put setup code here
+	canvas.parent("canvas-container");
 }
 
 function draw() {

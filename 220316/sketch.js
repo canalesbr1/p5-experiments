@@ -20,6 +20,7 @@ function setup() {
 	//tex0.noFill();
 	tex1.noStroke();
 	tex0.background(240);
+	canvas.parent("canvas-container");
 }
 
 function draw() {
