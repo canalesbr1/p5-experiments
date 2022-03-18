@@ -9,17 +9,28 @@
 		<script src="sketch.js"></script>
 		<style>
 			body {
-				margin: 0;
+				margin: 30px;
 				padding: 0;
-				font-family:sans-serif;
+        overflow:hidden;
+        font-family:sans-serif;
+        touch-action: none;
 			}
 			canvas {
 				margin: auto;
 			}
+      @media (max-width: 768px) {
+          body{
+              margin:0;
+          }
+					#inst{
+						margin-left:10px;
+					}
+      }
 		</style>
 	</head>
 	<body>
+
 		<div id = "canvas-container"></div>
-		<div>click/drag to draw. left/right arrows to change tools.</div>
+		<div id = "inst">click/drag, l/r arrows, two-touch(mobile)</div>
 	</body>
 </html>

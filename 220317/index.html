@@ -4,24 +4,31 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>220317</title>
-		<script src="libraries/p5.js"></script>
-		<!-- <script src="libraries/p5.sound.js"></script> -->
+		<script src="/libraries/p5.js"></script>
 		<script src="sketch.js"></script>
 		<style>
 			body {
-				margin: 0;
+				margin: 30px;
 				padding: 0;
-				overflow:hidden;
-				font-family:sans-serif;
+        overflow:hidden;
+        font-family:sans-serif;
+        touch-action: none;
 			}
 			canvas {
 				margin: auto;
 			}
+      @media (max-width: 768px) {
+          body{
+              margin:0;
+          }
+					#inst{
+						margin-left:10px;
+					}
+      }
 		</style>
 	</head>
 	<body>
-		<div id = "canvas-container"></div>
-		<div id = "upload-container"></div>
-		<div>upload image and click and drag.</div>
-	</body>
+    <div id = "canvas-container"></div>
+		<div id = "inst"><span id ="upload"></span><span>click/drag</span></div>
+  </body>
 </html>

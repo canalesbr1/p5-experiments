@@ -4,23 +4,28 @@ let img_grab;
 
 let x = 0;
 let y = 0;
-let lock_x = 0;
-let lock_y = 0;
 
 let active_tool = 0;
 let total_tools = 3;
 
+let w = 600;
+let h = 600;
+
 function setup() {
-	var canvas = createCanvas(600, 600);
-	graphics = createGraphics(700,700);
+	if(windowHeight<h){
+		h = windowHeight - 80;
+	}
+
+	var canvas = createCanvas(w, h);
+	graphics = createGraphics(width,height);
 	graphics.clear();
 
 	canvas.parent("canvas-container");
 }
 
 function draw() {
-		background(240);
-		//background(230);
+
+		background(245);
 
 		if(active_tool ==0){
 			let o = .05;
@@ -35,7 +40,7 @@ function draw() {
 			let c = cos(frameCount*.5)*8;
 			let a = map(sin(frameCount*.5),-1,1,10,25);
 
-			if(mouseIsPressed){
+			if(mouseIsPressed && touches.length<2){
 				x = lerp(x,mouseX,.025);
 				y = lerp(y,mouseY,.025);
 				graphics.ellipse(x+s,y+c,a,a);
@@ -48,10 +53,10 @@ function draw() {
 		}
 
 		else if(active_tool ==1){
-			if(mouseIsPressed){
+			if(mouseIsPressed || touches.length > 0){
 				x = lerp(x,mouseX,.025);
 				y = lerp(y,mouseY,.025);
-				graphics.image(image_grab,x-100,y,200,10);
+				graphics.image(image_grab,x-100,y-5,200,10);
 			}
 
 			else{
@@ -61,10 +66,10 @@ function draw() {
 		}
 
 		else if(active_tool ==2){
-			if(mouseIsPressed){
+			if(mouseIsPressed || touches.length > 0){
 				x = lerp(x,mouseX,.025);
 				y = lerp(y,mouseY,.025);
-				graphics.image(image_grab,x,y-100,10,200);
+				graphics.image(image_grab,x-5,y-100,10,200);
 			}
 
 			else{
@@ -76,23 +81,27 @@ function draw() {
 		image(graphics,0,0);
 
 		// INDICATORS
+
 		if(active_tool == 0){
-			noStroke();
-			fill(255,0,0);
-			ellipse(mouseX,mouseY,25,25);
+			noFill();
+			stroke(255,0,0);
+			strokeWeight(1);
+			ellipse(x,y,35,35);
 		}
 		else if(active_tool == 1){
 			noFill();
 			stroke(255,0,0);
-			strokeWeight(2);
-			line(mouseX-100,mouseY,mouseX+100,mouseY);
+			strokeWeight(1);
+			line(x-100,y,x+100,y);
 		}
 		else if(active_tool == 2){
 			noFill();
 			stroke(255,0,0);
-			strokeWeight(2);
-			line(mouseX,mouseY-100,mouseX,mouseY+100);
+			strokeWeight(1);
+			line(x,y-100,x,y+100);
 		}
+		line(x,y,mouseX,mouseY);
+
 }
 
 function keyPressed(){
@@ -109,13 +118,27 @@ function keyPressed(){
 	}
 }
 
+
 function mousePressed(){
 	if(active_tool ==1){
 		image_grab = graphics.get(mouseX-100,mouseY,200,1);
-		lock_x = mouseX;
 	}
-	if(active_tool ==2){
+	else if(active_tool ==2){
 		image_grab = graphics.get(mouseX,mouseY-100,1,200);
-		lock_y = mouseY;
 	}
+}
+
+function touchStarted(){
+    x = mouseX;
+    y = mouseY;
+    if(touches.length ==2){
+        active_tool = (active_tool + 1) % total_tools;
+        //print("changed tool");
+    }
+    if(active_tool==1){
+        image_grab = graphics.get(mouseX-100,mouseY,200,1);
+    }
+    else if(active_tool==2){
+        image_grab = graphics.get(mouseX,mouseY-100,1,200);
+    }
 }

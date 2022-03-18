@@ -2,6 +2,10 @@ let shader1,shader2;
 let tex0,tex1;
 let o = 25;
 let o1 = .01;
+let y = 0;
+
+let w = 600;
+let h = 600;
 
 function preload(){
 	shader1 = loadShader("shader1.vert","shader1.frag");
@@ -9,7 +13,11 @@ function preload(){
 }
 
 function setup() {
-	createCanvas(600, 600,WEBGL);
+	if(windowHeight<h){
+		h = windowHeight - 80;
+	}
+
+	var canvas = createCanvas(w, h,WEBGL);
 	pixelDensity(1);
 	noStroke();
 
@@ -20,10 +28,11 @@ function setup() {
 	//tex0.noFill();
 	tex1.noStroke();
 	tex0.background(240);
-	canvas.parent("canvas-container");
+    canvas.parent("canvas-container");
 }
 
 function draw() {
+
 
 	shader1.setUniform("u_rez",[width,height]);
 	shader2.setUniform("u_rez",[width,height]);
@@ -36,7 +45,13 @@ function draw() {
 
 	if(mouseIsPressed){
 		tex0.fill(r,g,b);
-		tex0.ellipse(mouseX,mouseY,15,15);
+        if(touches.length == 0){
+            y = mouseY;
+        }
+        else{
+            y = height-mouseY;
+        }
+		tex0.ellipse(mouseX,y,15,15);
 	}
 	//tex0.shader(shader1);
 	tex1.shader(shader1);
@@ -47,19 +62,4 @@ function draw() {
 	shader2.setUniform("tex1",tex1);
 	shader(shader2);
 	rect(0,0,width,height);
-	//image(tex0,width*-.5,height*-.5);
-
-	//tex0.clear();
-	//tex0 = tex1;
-	//tex0.image(tex1,width,height);
-
-	//image(tex1,-width*.5,-height*.5);
-
-
-
-
-	//tex0 = get(0,0,width,height);
-	//tex0.background(255,0,0);
-	//image(tex0,-width*.5,-height*.5);
-	//ellipse(mouseX,mouseY,25,25);
 }
