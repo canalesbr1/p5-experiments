@@ -33,7 +33,6 @@ function setup() {
 
 function draw() {
 
-
 	shader1.setUniform("u_rez",[width,height]);
 	shader2.setUniform("u_rez",[width,height]);
 	shader1.setUniform("tex0",tex0);
@@ -45,13 +44,7 @@ function draw() {
 
 	if(mouseIsPressed){
 		tex0.fill(r,g,b);
-        if(touches.length == 0){
-            y = mouseY;
-        }
-        else{
-            y = height-mouseY;
-        }
-		tex0.ellipse(mouseX,y,15,15);
+		tex0.ellipse(mouseX,mouseY,15,15);
 	}
 	//tex0.shader(shader1);
 	tex1.shader(shader1);

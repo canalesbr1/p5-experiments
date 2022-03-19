@@ -153,7 +153,6 @@ function draw() {
 	ellipse(x,y,45,45);
 	line(x,y,mouseX,mouseY);
 
-
 	//grab canvas and feed it back into tex0
 	tex0.image(tex1,0,0,width,height);
 }
