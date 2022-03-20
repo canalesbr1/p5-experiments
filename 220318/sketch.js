@@ -70,7 +70,7 @@ function draw() {
 		let pp = projectPoint2Line(a,b,p);
 
 		let d = dist(pp.x,pp.y,touches[2].x,touches[2].y);
-		stw = map(d,0,400,8,120);
+		stw = map(d,0,150,8,120);
 		stw = constrain(stw,8,120);
 	}
 

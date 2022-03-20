@@ -11,6 +11,9 @@ let total_tools = 3;
 let w = 600;
 let h = 600;
 
+let timepressed = 0;
+let touchtime = 0;
+
 function setup() {
 	if(windowHeight<h){
 		h = windowHeight - 80;
@@ -40,7 +43,10 @@ function draw() {
 			let c = cos(frameCount*.5)*8;
 			let a = map(sin(frameCount*.5),-1,1,10,25);
 
-			if(mouseIsPressed && touches.length<2){
+			if(mouseIsPressed){
+				timepressed ++;
+			}
+			if(mouseIsPressed && touches.length<2 && timepressed > 5){
 				x = lerp(x,mouseX,.025);
 				y = lerp(y,mouseY,.025);
 				graphics.ellipse(x+s,y+c,a,a);
@@ -104,18 +110,22 @@ function draw() {
 
 }
 
-function keyPressed(){
-	if(keyCode == RIGHT_ARROW){
-		active_tool = (active_tool + 1) % total_tools;
-	}
-	if(keyCode == LEFT_ARROW){
-		if(active_tool ==0){
-			active_tool = total_tools-1;
-		}
-		else{
-			active_tool = (active_tool - 1) % total_tools;
-		}
-	}
+// function keyPressed(){
+// 	if(keyCode == RIGHT_ARROW){
+// 		active_tool = (active_tool + 1) % total_tools;
+// 	}
+// 	if(keyCode == LEFT_ARROW){
+// 		if(active_tool ==0){
+// 			active_tool = total_tools-1;
+// 		}
+// 		else{
+// 			active_tool = (active_tool - 1) % total_tools;
+// 		}
+// 	}
+// }
+
+function doubleClicked(){
+	active_tool = (active_tool + 1) % total_tools;
 }
 
 
@@ -131,14 +141,33 @@ function mousePressed(){
 function touchStarted(){
     x = mouseX;
     y = mouseY;
-    if(touches.length ==2){
-        active_tool = (active_tool + 1) % total_tools;
-        //print("changed tool");
-    }
+
+		if(touchtime ==0){
+			touchtime = new Date().getTime();
+		}
+
+		else {
+			if (((new Date().getTime()) - touchtime) < 250) {
+				active_tool = (active_tool + 1) % total_tools;
+				touchtime = 0;
+			}
+
+			else{
+				touchtime = new Date().getTime();
+			}
+		}
+    // if(touches.length ==2){
+    //     active_tool = (active_tool + 1) % total_tools;
+    //     //print("changed tool");
+    // }
     if(active_tool==1){
         image_grab = graphics.get(mouseX-100,mouseY,200,1);
     }
     else if(active_tool==2){
         image_grab = graphics.get(mouseX,mouseY-100,1,200);
     }
+}
+
+function mouseReleased(){
+	timepressed = 0;
 }
