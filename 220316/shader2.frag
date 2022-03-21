@@ -31,22 +31,44 @@ void main(){
   vec2 st = coord.xy/u_rez.xy;
   st.y = 1.0 - st.y;
 
+  // vec4 tex = vec4(0,0,0,0);
+  // float cnt = 0.0;
+  // for(int i=-1;i<=1;i++){
+  //   for(int j=-1;j<=1;j++){
+  //     vec2 off = vec2(i,j)/u_rez.xy;
+  //     vec2 ref = st.xy + off.xy;
+  //     vec4 mycol = texture2D(tex1,ref);
+  //     vec3 c = rgb2hsv(mycol.xyz);
+  //     float s = (sin(c.x*c.y*c.z*15.0+mytime*2.0)+1.0)*.5;
+  //     s*= smoothstep(0.0,.3,c.y);
+  //
+  //     c.y = 0.0;
+  //     c = hsv2rgb(c);
+  //
+  //     vec3 col2 = vec3(0.);
+  //     vec3 col1 = vec3(.95);
+  //
+  //     c = mix(col1,col2,s);
+  //     tex += vec4(c.xyz,1.0);
+  //     cnt = cnt +1.0;
+  //   }
+  // }
+  //
+  // tex=tex/cnt;
+
   vec4 tex = texture2D(tex1,st);
   vec3 c = rgb2hsv(tex.xyz);
-  //c.y =0.0;
   float s = (sin(c.x*c.y*c.z*15.0+mytime*2.0)+1.0)*.5;
   s*= smoothstep(0.0,.3,c.y);
 
-  //c.z *= s;
   c.y = 0.0;
   c = hsv2rgb(c);
 
-  // vec3 col2 = vec3(0.95,0.925,0.875);
-  // vec3 col1 = vec3(1.0,0.2,0.0);
   vec3 col2 = vec3(0.);
   vec3 col1 = vec3(.95);
 
   c = mix(col1,col2,s);
+
   gl_FragColor = vec4(c,tex.w);
   //gl_FragColor = tex;
 }
