@@ -4,6 +4,7 @@ precision highp float;
 
 uniform vec2 u_rez;
 uniform sampler2D tex0;
+uniform float decay;
 
 void main(){
   vec2 uv = gl_FragCoord.xy/u_rez.xy;
@@ -13,8 +14,8 @@ void main(){
   vec4 col = texture2D(tex0,uv);
   float cnt = 0.0;
 
-  for(int i=-3;i<=3;i++){
-    for(int j=-3;j<=3;j++){
+  for(int i=-2;i<=2;i++){
+    for(int j=-2;j<=2;j++){
       vec2 off = vec2(i,j)/u_rez.xy;
       vec2 ref = uv.xy + off.xy;
       if(uv.xy != ref.xy){
@@ -32,7 +33,7 @@ void main(){
 
   vec4 tex = texture2D(tex0,uv.xy+dir.xy*-.5);
 
-  tex.xyz = clamp(tex.xyz - vec3(.0025),vec3(0.0),vec3(1.0));
+  tex.xyz = clamp(tex.xyz - vec3(decay),vec3(0.0),vec3(1.0));
   //tex.xyz = vec3(1.0) - tex.xyz;
   //vec3 col = vec3(uv.y,0.0,0.0);
 

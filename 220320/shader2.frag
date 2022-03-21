@@ -24,7 +24,8 @@ void main(){
   col=col/cnt;
 
   //vec4 tex = texture2D(tex0,uv);
-  col.xyz = vec3(1.0) - col.xyz - vec3(.035);
+  //col.xyz = vec3(smoothstep(0.3,.8,col.x));
+  col.xyz = vec3(1.0) - col.xyz - vec3(.055);
   //vec3 col = vec3(uv.y,0.0,0.0);
 
   gl_FragColor = vec4(col.xyz,1.0);
