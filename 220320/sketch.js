@@ -56,7 +56,7 @@ function setup() {
 	wrap = random();
 
 	let idx = int(random(-1,hangles.length));
-	//idx = 5;
+	// idx = 2;
 	//print("idx: " + idx);
 	hangle1 = hangles[idx];
 	rangle1 = rangles[idx];
@@ -151,7 +151,7 @@ function draw() {
 	strokeWeight(1);
 	noFill();
 	stroke(255,0,0);
-	ellipse(m.x,m.y,35,35);
+	ellipse(mouseX,mouseY,35,35);
 }
 
 function constructCanvasDim(){

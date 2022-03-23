@@ -41,10 +41,9 @@ function setup() {
 	pixelDensity(1);
 
 	tex1 = createGraphics(width,height,WEBGL);
-	tex1.background(245);
 
 	tex0 = createGraphics(width,height);
-	tex0.background(245);
+	tex0.background(255);
 
 	input = createFileInput(handleFile);
 	input.parent("upload");
@@ -74,6 +73,10 @@ function setup() {
 		imgh = height;
 	}
 
+	// if(windowWidth<width){
+	// 	offx += (width-windowWidth)*-.5;
+	// }
+
 	tex0.image(img,offx,offy,imgw,imgh);
 
 	stroke(255,0,0);
@@ -89,6 +92,7 @@ function draw() {
 		let imgw,imgh
 		let offx = 0;
 		let offy = 0;
+
 
 		if(imga > cnva){
 			imgh = height;
@@ -106,6 +110,11 @@ function draw() {
 			imgw = width;
 			imgh = height;
 		}
+
+		// if(windowWidth<width){
+		// 	offx += (width-windowWidth)*-.5;
+		// }
+
 		tex0.image(img,offx,offy,imgw,imgh);
 		cnt ++;
 		if (cnt==3){
@@ -122,7 +131,14 @@ function draw() {
 
 	if(mouseIsPressed ===true){
 		strength += .2;
+		// if(width < 600){
+		// 	strength = constrain(strength,0,1.25);
+		// }
 		strength = constrain(strength,0,1);
+
+		// else{
+		//
+		// }
 		x = lerp(x,mouseX,.075);
 		y = lerp(y,mouseY,.075);
 	}

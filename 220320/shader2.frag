@@ -26,7 +26,9 @@ void main(){
   vec4 col = texture2D(tex0,uv);
 
   //vec4 tex = texture2D(tex0,uv);
+  // float m = smoothstep(.5,.7,col.x);
   col.xyz = vec3(smoothstep(0.1,.8,col.x));
+
   float t = .15;
   float b1 = .6;
   float b2 = .3;
@@ -38,7 +40,9 @@ void main(){
 
   //col.xyz = mix(vec3(.96),vec3(0.2,1.0,.3),1.-col.x);
   //col.xyz = mix(col.xyz,vec3(0),edge);
-  col.xyz = mix(vec3(0.0,0.0,0.1),vec3(.97),pow(col.x,3.0));
+  // col.xyz = mix(vec3(.825,.99,.205),vec3(.71,.76,.79),pow(col.x,3.0));
+  col.xyz = mix(vec3(0.0,.95,0.),vec3(.75),pow(col.x,3.0));
+  // col.xyz = mix(col.xyz,vec3(0),m);
   //col.xyz = vec3(1.-edge);
   //vec3 col = vec3(uv.y,0.0,0.0);
 

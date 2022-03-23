@@ -46,6 +46,7 @@ function setup() {
 }
 
 function draw() {
+	
 	//set background on tex0 — don't know why shader doesn't catch background() if i dont do this.
 	if(frameCount < 15){
 		tex0.background(245);

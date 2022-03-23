@@ -24,7 +24,7 @@ void main(){
     }
   }
 
-  col=mix(tex,col/cnt,.5);
+  col=mix(tex,col/cnt,.75);
 
   //col.xyz = vec3(smoothstep(0.0,.9,col.x));
 
