@@ -1,5 +1,5 @@
 #ifdef GL_ES
-precision mediump float;
+precision highp float;
 #endif
 
 uniform vec2 u_rez;
@@ -95,10 +95,12 @@ void main(){
   vec3 dir = vec3(0,0,0);
 
   dir = cross(vec3((uv.xy-vec2(.5))*u_rez.xy,0),vec3(0,0,1));
-  vec3 curl = curlNoise(vec3((uv.xy-vec2(.5))*u_rez.xy*.002,0.0));
+  vec3 curl = curlNoise(vec3((uv.xy)*u_rez.xy*.001,time*0.001));
   float d = distance((uv.xy-vec2(.5))*u_rez.xy,vec2(0,0));
-  float mult = sin(d*1.75);
-  uv += dir.xy * .000075 * mult; //curl.xy*.00035
+  float mult = sin(d*10000.0);
+  curl = normalize(curl);
+  // uv += dir.xy * .000075 * mult + curl.xy*.00035; //curl.xy*.00035
+  uv += curl.xy * .0125 *mult + dir.xy * .000075 * mult;
   // uv.x += sin(uv.y*10.0+time*.002)*.00025;
   // uv.y += cos(uv.x*10.0+time*.002)*.00025;
 
@@ -124,5 +126,5 @@ void main(){
   // float m = step(.2,hsvcol.z);
   // col = mix(vec3(0),col,m);
 
-  gl_FragColor = tex;
+  gl_FragColor = vec4(col,1.0);
 }

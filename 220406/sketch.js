@@ -30,13 +30,15 @@ function setup() {
 	noFill();
 	strokeWeight(1);
 	stroke(255,0,0);
+	tex1.background(240);
+	tex0.background(240);
 	// tex0.colorMode(HSB);
 }
 
 function draw() {
 	if(frameCount<15){
-		tex1.background(0);
-		tex0.background(0);
+		tex1.background(240);
+		tex0.background(240);
 	}
 
 	if (mouseIsPressed){
